@@ -1,0 +1,15 @@
+.photo-grid-wrapper {
+  display: flex;
+  /* border: 1px solid red; */
+  flex-wrap: wrap;
+  width: 45rem;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.photo-grid {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 0.4rem;
+  /* border: 1px solid pink; */
+}
