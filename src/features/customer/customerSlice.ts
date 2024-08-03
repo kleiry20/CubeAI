@@ -16,5 +16,4 @@ const customerSlice = createSlice({
   reducers: {},
 });
 
-// export const { increment } = customerSlice.actions;
 export default customerSlice.reducer;

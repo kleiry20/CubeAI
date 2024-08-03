@@ -1,13 +1,11 @@
 import "./App.css";
-import Sidebar from "./components/Sidebar/Sidebar";
-
-const apiKey = import.meta.env.VITE_API_KEY;
+import CustomerView from "./components/CustomerView/CustomerView";
 
 function App() {
   return (
     <div className="app">
-      <header className="header">This is header</header>
-      <Sidebar />
+      <header className="header">This here is the heading</header>
+      <CustomerView />
     </div>
   );
 }

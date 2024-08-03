@@ -1,24 +1,28 @@
-.sidebar {
+.customer-view {
   display: flex;
-  /* gap: 1rem; */
   height: auto;
+  margin-top: 0.1rem;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #707070;
-  border-left: 1px solid #707070;
-  border-right: 1px solid #707070;
+  border-bottom: 1px solid rgb(0 0 0 / 0.2);
+  border-left: 1px solid rgb(0 0 0 / 0.2);
+  border-right: 1px solid rgb(0 0 0 / 0.2);
   background: #ffffff;
-  padding: 1rem;
+  padding: 1.5rem 1.2rem;
   cursor: pointer;
 }
 
+.active {
+  background: #eeeeee;
+}
+
 .list-h1 {
-  margin: 0;
   font-weight: 400;
   font-size: 1.4rem;
+  margin: 0 0 0.4rem 0;
 }
 
 .list-p {
@@ -32,9 +36,9 @@
   min-width: 26rem;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #707070;
   max-height: 92vh;
   overflow-y: scroll;
+  max-height: 811px;
 }
 
 .data {
@@ -43,15 +47,22 @@
 }
 
 .data-wrapper {
+  padding: 2rem 0;
   display: flex;
-  border-top: 1px solid #707070;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.data-h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
 .data-p {
   width: 60%;
+  text-align: center;
 }
 
 .selected-list {

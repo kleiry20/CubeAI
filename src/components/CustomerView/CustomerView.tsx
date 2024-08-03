@@ -1,14 +1,12 @@
-import "./Sidebar.css";
+import "./CustomerView.css";
 import { RootState } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCustomer } from "../../features/selectedCustomer/selectedCustomer";
 import PhotoGrid from "../PhotoGrid/PhotoGrid";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchCustomerImages } from "../../features/customerImage/customerImageSlice";
 
-const Sidebar = () => {
-  const [timerId, setTimerId] = useState<null | number>();
-  const [idx, setIdx] = useState(1);
+const CustomerView = () => {
   const dispatch = useDispatch();
 
   const customerList = useSelector((state: RootState) => state.customer.data);
@@ -20,30 +18,27 @@ const Sidebar = () => {
     (state: RootState) => state.customerImage.imageList
   );
 
-  // initial load
   useEffect(() => {
-    console.log("selectedCustomer.id", selectedCustomer.id);
     dispatch(fetchCustomerImages(selectedCustomer.id));
-  }, [dispatch, selectedCustomer]);
 
-  // ----- refreshing images
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     dispatch(fetchCustomerImages(selectedCustomer.id));
-  //   }, 10000);
-
-  //   return () => clearInterval(interval);
-  // }, [dispatch, selectedCustomer]);
-
-  console.log("imageList", imageList);
+    let count = 1;
+    const interval = setInterval(() => {
+      let number = Number(selectedCustomer.id) + count * 9;
+      dispatch(fetchCustomerImages(number));
+      count += 1;
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [selectedCustomer]);
 
   return (
-    <div className="sidebar">
+    <div className="customer-view">
       <div className="list-wrapper">
         {customerList
           ? customerList.map((customer) => (
               <div
-                className="list"
+                className={`list ${
+                  selectedCustomer.id == customer.id ? "active" : ""
+                }`}
                 key={customer.id}
                 onClick={() => {
                   dispatch(updateCustomer(customer));
@@ -59,26 +54,18 @@ const Sidebar = () => {
       <div className="data">
         {selectedCustomer && imageList ? (
           <div className="data-wrapper">
-            <h3 className="data-h3">Customer {selectedCustomer.id} details</h3>
+            <h3 className="data-h3">
+              Customer {selectedCustomer.id} details here
+            </h3>
             <p className="data-p">{selectedCustomer.title}</p>
             <PhotoGrid imageList={imageList} />
           </div>
         ) : (
-          <p>some error</p>
+          <p>error</p>
         )}
       </div>
-
-      {/* {imageList ? (
-        imageList.map((item: any) => (
-          <div key={item.id}>
-            <img src={item.url} width={20} height={20} />
-          </div>
-        ))
-      ) : (
-        <p>nothing</p>
-      )} */}
     </div>
   );
 };
 
-export default Sidebar;
+export default CustomerView;
